@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cadastro  de Usuários</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<h1>BANNER EVENTO</h1> 
+			<p>Descrição, texto, sei lá...</p> 
+		</div>
+	</div>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span> 
+				</button>
+				<a class="navbar-brand" href="#">TIGE-logo</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li><a href="cadastro.html">Registro de Usuários</a></li>
+					<li  class="active" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administrar Usuários <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="adm-usuario.html">Usuários</a></li>
+							<li><a href="adm-tipo-usuario.html">Tipos de usuários</a></li>
+
+						</ul>
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="page-header">
+			<h1>Tipos de usuário e permissões</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-8 col-sm-6">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">Usuários cadastrados</div>
+					<div class="panel-body">
+						<p>Você pode editar informações dos usuários, removê-los ou adicionar novos usuários ao sistema aqui, dependendo do tipo de usuário que você for.  (Para isso, faça seu login e execute suas possíveis ações)</p>
+					</div>
+
+					<form  action="adm-tipo-usuario.html">
+				
+					<div class="form-group">
+						<label for="email">Email:</label>
+  						<input type="email" class="form-control" id="email" aria-describedby="basic-addon2" required>
+  						<span class="input-group-addon" id="basic-addon2">@example.com</span>
+					</div>
+
+					<div class="form-group">
+					<label for="senha">Senha:</label>
+						<input type="password" class="form-control" id="senha" required>
+					</div>
+
+					<div>
+						<p class="panel-body">
+						<a class="glyphicon glyphicon-log-in" href="adm-tipo-usuario.html"> LOGIN</a>
+					</div>
+
+					</form>
+					</div>
+
+					<!-- Table -->
+					<table class="table">
+						<thead>
+							<th>#</th>
+							<th>Nome</th>
+							<th>Email</th>
+							<th>Instituição</th>
+							<th>Ações</th>
+						</thead>
+						<tr>
+							<th scope="row" class="glyphicon glyphicon-user"></th>
+							<td>Fulano de Tal</td>
+							<td>fulanohardcore@emailshow.com</td>
+							<td>IFRN-CNAT</td>	
+							<td><a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a><a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Coisinha Dali</td>
+							<td>coisinho@emailshow.com</td>
+							<td>IFRN-PAR</td>	
+							<td>
+							<a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+							<a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a></td>
+						</tr>
+						<tr>
+							<th scope="row" class="glyphicon glyphicon-plus"></th>
+							<td>Adicionar Usuário</td>
+							<td></td>
+							<td></td>
+							<td>
+							<a href="cadastro.html"><span class="glyphicon glyphicon-plus"></span></a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>	
