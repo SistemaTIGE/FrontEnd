@@ -1,25 +1,79 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta http-equiv="Content-Type"                   content="text/html; charset=UTF-8" /> 
-	<title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuários</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
+
 <body>
-<script type="text/javascript">
-	alert("Todos os campos são de preenchimento obrigatório!")
-</script>
-<h1> Login do usuário </h1>
-<table>
- <tr>
-   <td>E-mail</td>
-   <td><input type="text" name="email" size="40"> <br /></td>
- </tr>
- <tr>
-   <td>Senha:</td>
-   <td><input type="password" name="senha" size="6"> <br /></td>
- </tr>
-	<td><input type="button" name="entrar" value="Entrar" onclick="location. href= 'pag-usuario-4.html' "></td>
-</table>
- <a href="pag-usuario-5.html"> Esqueci minha senha </a> 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Administrador</a></li>
+                    <li><a href="#">Comunicação</a></li>
+                    <li><a href="#">Adm. do Evento</a></li>
+                    <li><a href="#">Palestrante</a></li>
+                    <li><a href="#">Usuário</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--<script type="text/javascript">
+      alert("Todos os campos são de preenchimento obrigatório!")
+    </script>-->
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Login do usuário</h1>
+        </div>
+    
+        <div class="row">
+            <!-- <div class="col-md-6"> -->
+            <form action="layout.html">
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="basic-addon2" required>
+                    <span class="input-group-addon" id="basic-addon2">@example.com</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="cpf">Senha:</label>
+                    <input type="passwrord" class="form-control" id="senha" required>
+                </div>
+
+                <a href="pag-usuario-5.html"> Esqueci minha senha </a> 
+          <br>
+      </div>
+
+      <div class="form-group">
+          <input type="submit" class="btn btn-success pull-right" value="Entrar" action="pag-usuario-4.html" >
+      </div>
+    <br><br>
+        <footer>
+            <center>
+                <p>© Copyright 2016 Sistema Tecnológico de Inovação no Gerenciamento de Eventos - Todos os direitos reservados.</p>
+            </center>
+        </footer>
 </body>
+
 </html>
