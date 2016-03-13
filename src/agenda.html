@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro de Usuários</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(document).ready(function(){
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        /* Dirtiest filter function ever ;) */
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Resultado não escontrado</td></tr>'));
+        }
+    });
+});
+    </script>
+    <style>
+        .filterable {
+        margin-top: 15px;
+        }
+        .filterable .panel-heading .pull-right {
+            margin-top: -20px;
+        }
+        .filterable .filters input[disabled] {
+            background-color: transparent;
+            border: none;
+            cursor: auto;
+            box-shadow: none;
+            padding: 0;
+            height: auto;
+        }
+        .filterable .filters input[disabled]::-webkit-input-placeholder {
+            color: #333;
+        }
+        .filterable .filters input[disabled]::-moz-placeholder {
+            color: #333;
+        }
+        .filterable .filters input[disabled]:-ms-input-placeholder {
+            color: #333;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2}
+
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Administrador</a></li>
+                    <li><a href="#">Comunicação</a></li>
+                    <li><a href="#">Adm. do Evento</a></li>
+                    <li><a href="#">Palestrante</a></li>
+                    <li><a href="#">Usuário</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav>
+
+
+
+       <div class="container">
+        <div class="page-header">
+            <center>
+            <h1>Agenda</h1>
+            </center>
+        </div>
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Programação</h3>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr class="filters">
+                        <td>
+                        <th><input type="text" class="form-control" placeholder="Data" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Horário" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Título Aprensentação" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Local" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Palestrante" disabled></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>30/02/1999</td>
+                            <td>14:50</td>
+                            <td>Minicurso Como sair do IF</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Bixinho - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>31/02/1999</td>
+                            <td>16:30</td>
+                            <td>Palestra Como não reprovar</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Coisinha - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>30/02/1999</td>
+                            <td>14:50</td>
+                            <td>Minicurso Como Sobreviver</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Coisinha Segundo - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>31/02/1999</td>
+                            <td>16:30</td>
+                            <td>Palestra Para Aprender Como Lidar</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Bixinho Segundo - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- 
+       <div class="container">
+        <div class="page-header">
+            <center>
+            <h1>Agenda</h1>
+            </center>
+        </div>
+       <table class="table">
+                        <thead>
+                            <th></th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Título Apresentação</th>
+                            <th> Local</th>
+                            <th>Palestrante - Instituição/Empresa</th>
+                        </thead>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-user"></th>
+                            <td>30/02/1999</td>
+                            <td>14:50</td>
+                            <td>Minicurso Como sair do IF</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Bixinho - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-user"></th>
+                            <td>31/02/1999</td>
+                            <td>16:30</td>
+                            <td>Palestra Como não reprovar</td>
+                            <td>Auditório Dominguinhos</td>
+                            <td>Bixinho Segundo - IF PAR</td>  
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                            </td>
+                        </tr>
+
+              </table>
+    </div> 
+ -->
+    </nav>
+    <!-- conteúdo 
+    AQUI VC INSERE SEU CÓDIGO
+    ISSO, AQUI DENTRO.
+    SIMBORA?
+    BOM TRABALHO AEW!-->
+
+    <div style="margin-top: 50px;">    
+        <footer>
+            <center>
+                <p>© Copyright 2016 Sistema Tecnológico de Inovação no Gerenciamento de Eventos - Todos os direitos reservados.</p>
+            </center>
+        </footer>
+        </div>
+</body>
+
+</html>
