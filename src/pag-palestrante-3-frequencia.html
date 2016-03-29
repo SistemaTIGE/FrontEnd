@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frequência</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+
+    <script>
+        $(document).ready(function(){
+    $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+        var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        /* Dirtiest filter function ever ;) */
+        var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+        $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+        $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+        if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">Resultado não escontrado</td></tr>'));
+        }
+    });
+});
+    </script>
+    <style>
+        .filterable {
+        margin-top: 15px;
+        }
+        .filterable .panel-heading .pull-right {
+            margin-top: -20px;
+        }
+        .filterable .filters input[disabled] {
+            background-color: transparent;
+            border: none;
+            cursor: auto;
+            box-shadow: none;
+            padding: 0;
+            height: auto;
+        }
+        .filterable .filters input[disabled]::-webkit-input-placeholder {
+            color: #333;
+        }
+        .filterable .filters input[disabled]::-moz-placeholder {
+            color: #333;
+        }
+        .filterable .filters input[disabled]:-ms-input-placeholder {
+            color: #333;
+        }
+
+        tr:nth-child(even) {background-color: #f2f2f2}
+
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="images/logo.png"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Administrador</a></li>
+                    <li><a href="#">Comunicação</a></li>
+                    <li><a href="#">Adm. do Evento</a></li>
+                    <li><a href="#">Palestrante</a></li>
+                    <li><a href="#">Usuário</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav>
+
+
+
+       <div class="container">
+        <div class="page-header">
+            <center>
+            <h1>Frequência</h1>
+            </center>
+        </div>
+    <div class="row">
+        <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-tittle">          Minicurso: Elaboração de Currículo - Ch: 3h</h3>
+                <h3 class="panel-tittle">          Xênia Silva Gomes Brandão </h3>
+                <div class="pull-right">
+                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr class="filters">
+                        <td>
+                        <th><input type="text" class="form-control" placeholder="Nome" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="08/12/2014" disabled></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ABNER ERNESTO DE SOUZA SANTANA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ANDRÉ LUIZ PERGENTINO DA SILVA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ARTHUR ANTUNES DE MELO RODRIGUES</td>
+                            <td>Faltou</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>BRENDA PATRÍCIA DOS SANTOS NASCIMENTO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>BRUNO LIMA CIPRIANO DA COSTA</td>
+                            <td>Faltou</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>DAMIANA RAYSSA CAMPOS FREIRE</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>EMILLY LEÃO DA SILVA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ÉRICLES DE LIMA FREITAS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>IAN HONORATO PEREIRA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ICARO LUIZ DE SOUZA LINO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ISAAC KENNEDY DINIZ GOMES</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>ITALO RAMON FERREIRA SOUTO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>JÉSSICA FRANCIELE RODRIGUES DE SOUZA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>JUAN FERNANDES DE JESUS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>JULIANA DA SILVA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>JULIANE PAULA VIEIRA RIBEIRO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>KEILLANY MARTINHO MACIEL</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>LARISSA MEDEIROS DE SOUSA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>LETÍCIA NUNES AZEVEDO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>MARCOS DINEI MEDEIROS FONTES</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>MARYANNE ALICE DE FREITAS TAVARES</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>MATEUS BARBOSA MARTINS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>MATEUS RODRIGUES DE MORAIS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>MATHEUS MIGUEL SOARES DE MEDEIROS LIMA</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>RAQUEL PONTES MARTINS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>RHIKSON LEITE DE MEDEIROS</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>SYLVIA HELENA CORTEZ DE MELO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>VINÍCIUS DE CARVALHO ARAÚJO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>VITOR FERNANDES VITALINO</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" class="glyphicon glyphicon-list-alt"></th>
+                            <td>VITOR FERRAZ SILVA TACCONI</td>
+                            <td>Presente</td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-trash pull-left"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-pencil pull-right"></span></a>
+                            </td>
+                        </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+    </nav>
+
+    <div style="margin-top: 50px;">    
+        <footer>
+            <center>
+                <p>© Copyright 2016 Sistema Tecnológico de Inovação no Gerenciamento de Eventos - Todos os direitos reservados.</p>
+            </center>
+        </footer>
+        </div>
+</body>
+
+</html>
